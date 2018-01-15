@@ -51,22 +51,23 @@ def main(args):
         start = timer()
         source_igraph_id = get_vertex_seq_id(G, row.source_mag_id)
         target_igraph_id = get_vertex_seq_id(G, row.target_mag_id)
-        print("source: arxiv_id {}  |  mag_id {}  |  igraph_id {}".format(row.source_arxiv_id, row.source_mag_id, source_igraph_id))
-        print("target: arxiv_id {}  |  mag_id {}  |  igraph_id {}".format(row.target_arxiv_id, row.target_mag_id, target_igraph_id))
+        logger.info("source: arxiv_id {}  |  mag_id {}  |  igraph_id {}".format(row.source_arxiv_id, row.source_mag_id, source_igraph_id))
+        logger.info("target: arxiv_id {}  |  mag_id {}  |  igraph_id {}".format(row.target_arxiv_id, row.target_mag_id, target_igraph_id))
         if ( not source_igraph_id ) or ( not target_igraph_id ):
-            print("source/target nodes not identified. skipping...")
+            logger.info("source/target nodes not identified. skipping...")
         else:
             sp_length = G.shortest_paths(source=source_igraph_id, target=target_igraph_id, mode='ALL')
-            print("shortest path length: {}".format(sp_length))
-        print("")
+            logger.info("shortest path length: {}".format(sp_length))
+            logger.debug("calculating this pair took {}".format(timer()-start))
+        logger.info("")
         times.append(timer()-start)
         # mode='ALL' means consider the graph as undirected
     logger.debug("done testing all pairs. took {}".format(format_timespan(timer()-start_testpairs)))
     logger.debug("average time per pair: {}".format(format_timespan(sum(times) / len(times))))
-    with open('hepth_sample_pairs_times.txt', 'w') as times_outf:
-        for t in times:
-            times_outf.write(str(t))
-            times_outf.write('\n')
+    # with open('hepth_sample_pairs_times.txt', 'w') as times_outf:
+    #     for t in times:
+    #         times_outf.write(str(t))
+    #         times_outf.write('\n')
 
 
 if __name__ == "__main__":
