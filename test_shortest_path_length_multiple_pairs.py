@@ -58,7 +58,7 @@ def main(args):
         else:
             sp_length = G.shortest_paths(source=source_igraph_id, target=target_igraph_id, mode='ALL')
             logger.info("shortest path length: {}".format(sp_length))
-            logger.debug("calculating this pair took {}".format(timer()-start))
+            logger.debug("calculating this pair took {}".format(format_timespan(timer()-start)))
         logger.info("")
         times.append(timer()-start)
         # mode='ALL' means consider the graph as undirected
