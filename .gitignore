@@ -8,3 +8,4 @@ venv
 bin
 *.sh
 __pycache__/
+output/

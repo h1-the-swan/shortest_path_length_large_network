@@ -28,7 +28,7 @@ def main(args):
     graph_fname = os.path.abspath(args.graph)
     start = timer()
     logger.debug("loading graph from file: {}...".format(graph_fname))
-    # G = load_graph(graph_fname)
+    G = load_graph(graph_fname)
     logger.debug("done loading graph. took {}".format(format_timespan(timer()-start)))
 
     output_fname = os.path.abspath(args.out)
@@ -61,11 +61,11 @@ def main(args):
     for pair in pairs:
         start_pair = timer()
         sp_length = get_shortest_path_length_for_one_pair(G, pair.source_mag_id, pair.target_mag_id)
-        output_row = [str(pair.source_arxiv_id, pair.target_arxiv_id, str(sp_length))]
+        output_row = [str(pair.source_arxiv_id), str(pair.target_arxiv_id), str(sp_length)]
         outf.write("\t".join(output_row))
         outf.write("\n")
-        logger.debug("done calculating shortest path for {} to {}. sp_length: {}. took {}".format(output_row[0], output_row[1], output_row[2], timer()-start_pair))
-    logger.debug("done calculating shortest paths for {} pairs. took {}".format(len(pairs), timer()-start))
+        logger.debug("done calculating shortest path for {} to {}. sp_length: {}. took {}".format(output_row[0], output_row[1], output_row[2], format_timespan(timer()-start_pair)))
+    logger.debug("done calculating shortest paths for {} pairs. took {}".format(len(pairs), format_timespan(timer()-start)))
 
 
     outf.close()
