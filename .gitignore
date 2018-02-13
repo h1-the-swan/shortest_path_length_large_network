@@ -6,3 +6,4 @@ venv
 *.o[0-9]*
 bin
 *.sh
+__pycache__/
