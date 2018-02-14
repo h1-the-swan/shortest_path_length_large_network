@@ -79,7 +79,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="given a network (pajek file) and a list of node pairs, calculate the shortest path lengths for a subset of those node pairs", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("graph", help="network graph (Pajek .net file)")
     parser.add_argument("pairs", help="tsv file with pairs samples")
-    parser.add_argument("-o", "--out", help="output file (tsv). contains 3 columns: source_arxiv_id, target_arxiv_id, shortest_path_length")
+    parser.add_argument("-o", "--out", required=True, help="output file (tsv). contains 3 columns: source_arxiv_id, target_arxiv_id, shortest_path_length")
     parser.add_argument("--start", type=int, default=0, help="index of the sample pair to start")
     parser.add_argument("--num", type=int, default=80, help="number of pairs to calculate (starting from --start)")
     parser.add_argument("--debug", action='store_true', help="output debugging info")
